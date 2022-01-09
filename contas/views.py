@@ -54,5 +54,14 @@ def update(request, pk):
     # voce pode dar nomes aos recursos em url.py. Aqui voce redireciona, pois tem o botão de post e ele retorna na listagem para a pagina de post.
 
     data['form'] = form
+    data['transacao'] = transacao
     return render(request, 'contas/form.html', data)
+
+
 # render está chamando pra tela
+
+def delete(request, pk):
+    transacao = Transacao.objects.get(pk=pk)
+    # filter retorna mais de um objeto e o get retorna um objeto
+    transacao.delete()
+    return redirect('url_listagem')
