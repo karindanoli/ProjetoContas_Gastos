@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.https://docs.djangoproject.com/en/4.0/ref/models/fields/
 
 class Categoria(models.Model):

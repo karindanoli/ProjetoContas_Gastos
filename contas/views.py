@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from contas.models import Transacao
 
 
 from django.http import HttpResponse
 import datetime
+from .form import TransacaoForm
 
 def home(request):
     data = {}
@@ -23,3 +24,16 @@ def listagem(request):
     data ['transacoes'] = Transacao.objects.all()
     #Objects é um manager é uma classe de model e traz operações de banco de dados como o all para buscar tudo no BD, FILTER PARA FILTRAR ALGO, last para pegar a ultima transacao do bd, first para pegar a primeira transacao do bd,
     return render(request, 'contas/listagem.html', data)
+
+def nova_transacao(request):
+    form = TransacaoForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_listagem')
+    #voce pode dar nomes aos recursos em url.py. Aqui voce redireciona, pois tem o botão de post e ele retorna na listagem para a pagina de post.
+
+    data = {}
+    data['form'] = form
+    return render(request, 'contas/form.html', data)
+#render está chamando pra tela

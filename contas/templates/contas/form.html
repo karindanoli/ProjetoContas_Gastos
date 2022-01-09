@@ -5,19 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Post</title>
 </head>
 <body>
-    <h2>Listagem</h2>
 
-    <ul>
-    {% for transacao in transacoes %}
+<h1> Post em django</h1>
 
-            <li><b>{{ transacao.nome }} - {{ transacao.data}} - {{ transacao.valor}}</b></li>
-    {% endfor %}
-    </ul>
+<form method="POST">
+    {% csrf_token %}
+    /* protege o código de injeção de scripts e outros ataques */
 
-    <a href="{% url 'urlNova' %}">Novo Post</a>
+    {{form.as_p}}
+
+    <button type="submit">Salvar</button>
+</form>
 
 </body>
 </html>
